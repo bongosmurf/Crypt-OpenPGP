@@ -105,6 +105,8 @@ sub key_id {
 
 sub key_id_hex { uc unpack 'H*', $_[0]->key_id }
 
+sub key_id_hex_short { uc substr( unpack( 'H*', $_[0]->key_id ), -8, 8) }
+
 sub fingerprint {
     my $cert = shift;
     unless ($cert->{fingerprint}) {
@@ -504,8 +506,12 @@ Returns the key ID.
 
 =head2 $cert->key_id_hex
 
-Returns the key ID as a hex string.
+Returns the long key ID as a hex string.
 
+=head2 $cert->key_id_hex_short
+
+Returns the short key ID as a hex string.
+  
 =head2 $cert->key
 
 Returns the algorithm-specific portion of the certificate, the public
