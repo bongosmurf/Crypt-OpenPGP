@@ -19,6 +19,10 @@ sub key_id {
     $sig->{key_id};
 }
 
+sub key_id_hex { uc unpack 'H*', $_[0]->key_id }
+
+sub key_id_hex_short { uc substr( unpack( 'H*', $_[0]->key_id ), -8, 8) }
+
 sub timestamp {
     my $sig = shift;
     $sig->{version} < 4 ?
@@ -404,6 +408,14 @@ This is a standard OpenPGP signature.
 =head2 $sig->key_id
 
 Returns the ID of the key that created the signature.
+
+=head2 $sig->key_id_hex
+
+Returns the long hexadecimal ID of the key that created the signature.
+
+=head2 $sig->key_id_hex_short
+
+Returns the short hexadecimal ID of the key that created the signature.
 
 =head2 $sig->timestamp
 
